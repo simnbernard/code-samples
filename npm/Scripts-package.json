@@ -1,0 +1,21 @@
+{
+  "name": "npm-scripts",
+  "version": "1.0.0",
+  "description": "Just for run a global 'npm i'",
+  "private": true,
+  "scripts": {
+    "global:install:front": "cd ./project-front && npm i",
+    "global:install:api": "cd ./project-api && npm i",
+    "global:postinstall": "npm run install:front && npm run install:api",
+
+    "api:build": "npm run check && npx tsc",
+    "api:start": "cross-env NODE_ENV=development nodemon",
+
+    "start:local": "API_BASE_URL='http://localhost:8081' npm run start",
+    "start": "npm run check && react-scripts start",
+    "build": "npm run check && react-scripts build",
+
+    "pretty": "prettier --write \"./**/*.{ts,tsx}\"",
+    "check": "eslint \"src/**/*.{ts,tsx}\" && prettier --check \"src/**/*.{ts,tsx}\""
+  }
+}

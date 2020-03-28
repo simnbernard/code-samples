@@ -1,0 +1,26 @@
+# docker-compose for local developpement
+# don't deploy it in the production server
+version: "3.7"
+
+services:
+  project-nginx:
+    container_name: project-nginx
+    build: project-nginx/
+
+  project-front:
+    container_name: project-front
+    build:
+      context: project-front/
+      target: install
+    command: "npm run start"
+    volumes:
+      - ./project-front:/app-build
+
+  project-api:
+    container_name: project-api
+    build:
+      context: project-api/
+      target: install
+    command: "npm run start"
+    volumes:
+      - ./project-api/src:/app-build/src

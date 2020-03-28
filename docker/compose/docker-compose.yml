@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  project-nginx:
+    container_name: project-nginx
+    image: project-nginx
+    build: project-nginx/
+    depends_on:
+      - project-api
+      - project-front
+    ports:
+      - 80:80
+    networks:
+      - nginx
+
+  project-front:
+    container_name: project-front
+    image: project-front
+    build: project-front/
+    depends_on:
+      - project-api
+    networks:
+      - nginx
+
+  project-api:
+    container_name: project-api
+    image: project-api
+    build: project-api/
+    networks:
+      - nginx
+
+networks:
+  nginx:
